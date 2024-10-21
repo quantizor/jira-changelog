@@ -45,10 +45,10 @@ export default class SourceControl {
    * Return top-level commit logs for a range.
    * Commits which were the result of a merge are nested under `<log>.graph.merged`.
    *
-   * @param {String} dir The source control workspace directory.
+   * @param {String} workspaceDir The source control workspace directory.
    * @param {Object} range An object defining the range boundaries (see above)
    *
-   * @return {Promsie} Resolves to a list of top-level commit objects
+   * @return {Promise} Resolves to a list of top-level commit objects
    */
   getCommitLogs(workspaceDir, range) {
     const workspace = git(workspaceDir);
@@ -109,7 +109,7 @@ export default class SourceControl {
    * reverts and confirm the diff is exactly the opposite, but that might be overkill.
    *
    * @param {Object} log - A single commit log objedt
-   * @return {String or null} - The reverted sha or null if it is not a revert
+   * @return {String | null} - The reverted sha or null if it is not a revert
    */
   isRevert(log) {
     const oneLine = log.fullText.replace(/\n/g, ' ').trim();
